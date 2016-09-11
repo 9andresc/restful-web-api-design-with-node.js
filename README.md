@@ -25,3 +25,4 @@ Steps to get started:
 - Install Express and other modules through NPM
 - Setting up a development environment
 - Handling HTTP requests
+- Modularizing code
