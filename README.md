@@ -27,3 +27,4 @@ Steps to get started:
 - Handling HTTP requests
 - Modularizing code
 - Testing Node.js
+- Working with mock objects

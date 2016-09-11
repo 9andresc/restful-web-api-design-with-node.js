@@ -1,32 +1,32 @@
-function handleGETRequest(response) {
+function handleGetRequest(response) {
   response.writeHead(200, {
     'Content-Type': 'text/plain'
   });
   response.end('GET action was requested');
 }
 
-function handlePOSTRequest(response) {
+function handlePostRequest(response) {
   response.writeHead(200, {
     'Content-Type': 'text/plain'
   });
   response.end('POST action was requested');
 }
 
-function handlePUTRequest(response) {
+function handlePutRequest(response) {
   response.writeHead(200, {
     'Content-Type': 'text/plain'
   });
   response.end('PUT action was requested');
 }
 
-function handleHEADRequest(response) {
+function handleHeadRequest(response) {
   response.writeHead(200, {
     'Content-Type': 'text/plain'
   });
   response.end('HEAD action was requested');
 }
 
-function handleDELETERequest(response) {
+function handleDeleteRequest(response) {
   response.writeHead(200, {
     'Content-Type': 'text/plain'
   });
@@ -43,19 +43,19 @@ function handleBadRequest(response) {
 exports.handleRequest = function (request, response) {
   switch (request.method) {
     case 'GET':
-      handleGETRequest(response);
+      handleGetRequest(response);
       break;
     case 'POST':
-      handlePOSTRequest(response);
+      handlePostRequest(response);
       break;
     case 'PUT':
-      handlePUTRequest(response);
+      handlePutRequest(response);
       break;
     case 'DELETE':
-      handleDELETERequest(response);
+      handleDeleteRequest(response);
       break;
     case 'HEAD':
-      handleHEADRequest(response);
+      handleHeadRequest(response);
       break;
     default:
       handleBadRequest(response);

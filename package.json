@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "nodeunit tests/test-math.js"
+    "test": "nodeunit tests/test-http-handlers.js"
   },
   "repository": {
     "type": "git",
