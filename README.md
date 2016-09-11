@@ -17,3 +17,10 @@ The REST goals are:
 - Reliability
 - Scalability
 - Performance
+
+## Chapter 2: Getting Started with Node.js
+Steps to get started:
+
+- Initialize `package.json` file with `npm init` command
+- Install Express and other modules through NPM
+- Setting up a development environment

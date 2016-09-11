@@ -1,1 +1,6 @@
+# Extensions
+*.log
+
+# Directories
 .idea/
+node_modules/

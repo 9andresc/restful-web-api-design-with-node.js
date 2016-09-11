@@ -1,0 +1,24 @@
+{
+  "name": "restful-web-api-design-with-node.js",
+  "version": "1.0.0",
+  "description": "My coding practices from the book: RESTful Web API Design with Node.js - Second Edition",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavoandrescabral/restful-web-api-design-with-node.js.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gustavoandrescabral/restful-web-api-design-with-node.js/issues"
+  },
+  "homepage": "https://github.com/gustavoandrescabral/restful-web-api-design-with-node.js#readme",
+  "dependencies": {
+    "express": "4.14.0",
+    "nodeunit": "0.10.2"
+  }
+}
