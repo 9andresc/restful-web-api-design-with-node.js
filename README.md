@@ -75,3 +75,27 @@ the most commonly returned results. The size of the reading cache and
 the flush interval of the writing log are configurable parameters, 
 which can be further adjusted in order to be adequate for the 
 application load.
+
+#### Key Difference Between Key/Value and Document Stores
+Unlike a key/value store, document stores support indexing and 
+searching for data based on different criteria, for example, attributes 
+of a given document. This brings greater flexibility in comparision to 
+key/value stores.
+
+#### MongoDB
+Is an open-source document database with built-in support for the JSON 
+format. It provides a full index support, based on any of the available 
+attributes in a document. It is ideal for high-availability scenarios 
+due to its scalability features.
+
+#### Mongoose
+Is a module that connects Node.js to MongoDB ia an object document 
+mapper (ODM) style. It offers the create, read, update and delete 
+functionalities for documents stored in the database. Mongoose defines 
+the structure of the used documents using schemas. The schema is 
+smallest unit of data definition in Mongoose. A model is built out of a 
+schema definition. It is a constructor-like function that can be used 
+to create or query documents. Documents are instances of a model and 
+represent one-to-one mapping to the documents stored in MongoDB. The 
+schema-model-document hierarchy provides a self-descriptive way of 
+defining objects and allows easy data validation.
