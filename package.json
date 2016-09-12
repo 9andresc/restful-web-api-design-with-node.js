@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/gustavoandrescabral/restful-web-api-design-with-node.js.git"
   },
+  "scripts": {
+    "test": "mocha tests/test-contact-model.js"
+  },
   "author": "",
   "license": "MIT",
   "bugs": {
@@ -19,7 +22,9 @@
     "express": "4.14.0",
     "leveldown": "1.4.6",
     "levelup": "1.3.2",
+    "mocha": "3.0.2",
     "mongoose": "4.6.0",
-    "morgan": "1.7.0"
+    "morgan": "1.7.0",
+    "should": "11.1.0"
   }
 }
