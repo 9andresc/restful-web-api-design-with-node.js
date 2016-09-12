@@ -32,9 +32,12 @@ Playing around with basic Node.js:
 - Testing Node.js
 - Working with mock objects
 
-## Building a Typical Web API
+## Chapter 3: Building a Typical Web API
 To sum up, I will learn the following:
 
 - How to specify a Web API
 - How to implement routes
 - How to query the API
+- How content negotiation works
+- What is CORS
+- API versioning
