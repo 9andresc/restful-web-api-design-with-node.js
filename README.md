@@ -58,3 +58,20 @@ These are the NoSQL databases to review & use:
 
 - LevelDB
 - MongoDB
+
+#### LevelDB
+It is an open-source implementation developed by Google and written in 
+C++. It is supported by a wide range of platforms, including Node.js. 
+LevelDB is a key/value store; both the key and value are represented as 
+binary data, so their content can vary from simple strings to binary 
+representations of serialized objects in any format, such as JSON or 
+XML.
+What makes LevelDB perform better than an arbitrary file storage 
+implementation is it uses a "log-structured merge" topology, which 
+stores all write operations in an in-memory log, transferred (flushed) 
+regularly to a permanent storage called Sorted String (SST) files. Read 
+operations first attempt to retrieve entries from a cache containing 
+the most commonly returned results. The size of the reading cache and 
+the flush interval of the writing log are configurable parameters, 
+which can be further adjusted in order to be adequate for the 
+application load.
