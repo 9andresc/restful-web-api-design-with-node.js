@@ -2,7 +2,7 @@ var fs = require('fs');
 
 function readJsonFile() {
   var pathFile = './data/contacts.json';
-  return fs.readFile(pathFile);
+  return fs.readFileSync(pathFile);
 }
 
 exports.list = function () {
@@ -15,7 +15,7 @@ exports.query = function (number) {
 
   for (var i = 0; i < result.length; i++) {
     var contact = result[i];
-    if (contact['primary-contact-number'] === number) {
+    if (contact['primaryContactNumber'] === number) {
       return contact;
     }
   }
