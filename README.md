@@ -41,3 +41,20 @@ To sum up, I will learn the following:
 - How content negotiation works
 - What is CORS
 - API versioning
+
+## Chapter 4: Using NoSQL Databases
+NoSQL databases are used heavily in cloud environments. They have the 
+following advantages over traditional SQL databases:
+
+- They are schemaless, that is, they work with object representations 
+rather than store the object state in one or several tables, depending 
+on their complexity.
+- They are extendable, because they store an actual object. Data 
+evolution is supported implicitly, so all you need to do is just call 
+the operation that stores the object.
+- They are designed to be highly distributed and scalable.
+
+These are the NoSQL databases to review & use:
+
+- LevelDB
+- MongoDB
