@@ -24,7 +24,15 @@ Steps to get started:
 - Initialize `package.json` file with `npm init` command
 - Install Express and other modules through NPM
 - Setting up a development environment
+
+Playing around with basic Node.js:
+
 - Handling HTTP requests
 - Modularizing code
 - Testing Node.js
 - Working with mock objects
+
+## Building a Typical Web API
+To sum up, I will learn the following:
+
+- How to specify a Web API

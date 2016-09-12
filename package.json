@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "My coding practices from the book: RESTful Web API Design with Node.js - Second Edition",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "nodeunit tests/test-http-handlers.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gustavoandrescabral/restful-web-api-design-with-node.js.git"
@@ -18,8 +14,13 @@
   },
   "homepage": "https://github.com/gustavoandrescabral/restful-web-api-design-with-node.js#readme",
   "dependencies": {
+    "body-parser": "1.15.2",
+    "cookie-parser": "1.4.3",
+    "debug": "2.2.0",
     "express": "4.14.0",
+    "morgan": "1.7.0",
     "nodeunit": "0.10.2",
+    "pug": "2.0.0-beta6",
     "sinon": "1.17.5"
   }
 }
