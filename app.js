@@ -1,39 +1,44 @@
 var express = require('express');
+
+var http = require('http');
 var path = require('path');
-var logger = require('morgan');
+var url = require('url');
+
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+
+var contacts = require('./modules/contacts');
 
 var app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.get('/contacts', function (request, response) {
+  var getParams = url.parse(request.url, true).query;
+
+  if (Object.keys(getParams).length === 0) {
+    response.setHeader('content-type', 'application/json');
+    response.end(JSON.stringify(contacts.list()));
+  } else {
+    response.setHeader('content-type', 'application/json');
+    response.end(JSON.stringify(contacts.queryByArg(getParams['arg'], getParams['value'])));
+  }
 });
 
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.get('/contacts/:number', function (request, response) {
+  response.setHeader('content-type', 'application/json');
+  response.end(JSON.stringify(contacts.query(request.params['number'])));
 });
 
-app.listen(3000);
+app.get('/groups', function (request, response) {
+  response.setHeader('content-type', 'application/json');
+  response.end(JSON.stringify(contacts.listGroups()));
+});
 
-module.exports = app;
+app.get('/groups/:name', function (request, response) {
+  response.setHeader('content-type', 'application/json');
+  response.end(JSON.stringify(contacts.getMembers(request.params['name'])));
+});
+
+http.createServer(app).listen(3000, function () {
+  console.log('Express server listening on port 3000');
+});

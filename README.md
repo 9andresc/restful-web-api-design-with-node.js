@@ -36,3 +36,4 @@ Playing around with basic Node.js:
 To sum up, I will learn the following:
 
 - How to specify a Web API
+- How to implement routes
