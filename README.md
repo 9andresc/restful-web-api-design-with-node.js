@@ -99,3 +99,14 @@ to create or query documents. Documents are instances of a model and
 represent one-to-one mapping to the documents stored in MongoDB. The 
 schema-model-document hierarchy provides a self-descriptive way of 
 defining objects and allows easy data validation.
+
+## Chapter 5: Implementing a Fully-Fledged RESTful Service
+To turn our mobile contacts data service into a fully-fledged RESTful 
+service we need to look at these:
+
+- Extensibility and versioning
+- Working with arbitrary data
+- Linking
+- Paging and filtering
+- Caching
+- Discovery and exploration
