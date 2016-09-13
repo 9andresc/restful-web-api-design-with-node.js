@@ -3,6 +3,7 @@ var express = require('express');
 var http = require('http');
 var url = require('url');
 
+var CacheControl = require('express-cache-control');
 var bodyParser = require('body-parser');
 var expressPaginate = require('express-paginate');
 var gridStream = require('gridfs-stream');
@@ -18,6 +19,8 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.json());
 app.use(expressPaginate.middleware(10, 20));
+
+var cache = new CacheControl().middleware;
 
 mongoose.connect('mongodb://localhost/contacts');
 
@@ -65,7 +68,7 @@ app.get('/contacts', function(request, response) {
   response.end('Version 2 is found at URI /v2/contacts/ ');
 });
 
-app.get('/v2/contacts', function (request, response) {
+app.get('/v2/contacts', cache('minutes', 1), function (request, response) {
   var getParams = url.parse(request.url, true).query;
 
   if (Object.keys(getParams).length === 0) {
