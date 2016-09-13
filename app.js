@@ -4,8 +4,10 @@ var http = require('http');
 var url = require('url');
 
 var bodyParser = require('body-parser');
+var expressPaginate = require('express-paginate');
 var gridStream = require('gridfs-stream');
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 var contactDataServiceV100 = require('./modules/contact-data-service-v1.0.0');
 var contactDataServiceV200 = require('./modules/contact-data-service-v2.0.0');
@@ -15,6 +17,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.json());
+app.use(expressPaginate.middleware(10, 20));
 
 mongoose.connect('mongodb://localhost/contacts');
 
@@ -32,6 +35,7 @@ var contactSchema = new mongoose.Schema({
   emailAddresses: [String],
   groups: [String]
 });
+contactSchema.plugin(mongoosePaginate);
 
 var Contact = mongoose.model('Contact', contactSchema);
 
@@ -56,16 +60,25 @@ app.get('/v1/contacts', function (request, response) {
   contactDataServiceV100.list(Contact, response);
 });
 
-app.get('/contacts', function (request, response) {
+app.get('/contacts', function(request, response) {
+  response.writeHead(302, {'Location' : '/v2/contacts/'});
+  response.end('Version 2 is found at URI /v2/contacts/ ');
+});
+
+app.get('/v2/contacts', function (request, response) {
   var getParams = url.parse(request.url, true).query;
 
   if (Object.keys(getParams).length === 0) {
-    contactDataServiceV200.list(Contact, response);
+    contactDataServiceV200.paginate(Contact, request, response);
   } else {
-    var key = Object.keys(getParams)[0];
-    var value = getParams[key];
+    if (getParams['limit'] != null || getParams['page'] != null) {
+      contactDataServiceV200.paginate(Contact, request, response);
+    } else {
+      var key = Object.keys(getParams)[0];
+      var value = getParams[key];
 
-    JSON.stringify(contactDataServiceV200.queryByArg(Contact, key, value, response));
+      contactDataServiceV200.queryByArg(Contact, key, value, response);
+    }
   }
 });
 
