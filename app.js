@@ -4,6 +4,7 @@ var http = require('http');
 var url = require('url');
 
 var bodyParser = require('body-parser');
+var gridStream = require('gridfs-stream');
 var mongoose = require('mongoose');
 
 var contactDataServiceV100 = require('./modules/contact-data-service-v1.0.0');
@@ -16,6 +17,9 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost/contacts');
+
+var mongodb = mongoose.connection;
+var gfs = gridStream(mongodb.db, mongoose.mongo);
 
 var contactSchema = new mongoose.Schema({
   primaryContactNumber: {type: String, index: {unique: true}},
@@ -64,6 +68,54 @@ app.get('/contacts', function (request, response) {
 
     JSON.stringify(contactDataServiceV200.queryByArg(Contact, key, value, response));
   }
+});
+
+app.get('/v2/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.getImage(gfs, request.params.primaryContactNumber, response);
+});
+
+app.get('/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.getImage(gfs, request.params.primaryContactNumber, response);
+});
+
+app.post('/v2/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.updateImage(gfs, request, response);
+});
+
+app.post('/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.updateImage(gfs, request, response);
+});
+
+app.put('/v2/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.updateImage(gfs, request, response);
+});
+
+app.put('/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.updateImage(gfs, request, response);
+});
+
+app.del('/v2/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.deleteImage(gfs, mongodb.db, request.params.primaryContactNumber, response);
+});
+
+app.del('/contacts/:primaryContactNumber/image', function (request, response) {
+  var gfs = Grid(mongodb.db, mongoose.mongo);
+
+  contactDataServiceV200.deleteImage(gfs, mongodb.db, request.params.primaryContactNumber, response);
 });
 
 http.createServer(app).listen(app.get('port'));

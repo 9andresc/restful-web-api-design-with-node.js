@@ -222,3 +222,46 @@ exports.queryByArg = function (model, key, value, response) {
     }
   });
 };
+
+exports.updateImage = function (gfs, request, response) {
+  var primaryContactNumber = request.params.primaryContactNumber;
+
+  request.pipe(gfs.createWriteStream({
+    _id: primaryContactNumber,
+    filename: 'image',
+    mode: 'w'
+  }));
+  response.send('Successfully uploaded image for primary contact number: ' + primaryContactNumber);
+};
+
+exports.getImage = function (gfs, primaryContactNumber, response) {
+  var imageStream = gfs.createReadStream({
+    _id: primaryContactNumber,
+    filename: 'image',
+    mode: 'r'
+  });
+
+  imageStream.on('error', function (error) {
+    console.error(error);
+    response.send('404', 'Contact image not Found');
+  });
+
+  response.setHeader('Content-Type', 'image/jpeg');
+  imageStream.pipe(response);
+};
+
+exports.deleteImage = function (gfs, mongodb, primaryContactNumber, response) {
+  var collection = mongodb.collection('fs.files');
+
+  collection.remove({_id: primaryContactNumber, filename: 'image'}, function (error, contact) {
+    if (error) {
+      console.error(error);
+    }
+
+    if (contact === null) {
+      response.send('404', 'Contact image not found');
+    }
+  });
+
+  response.send('Successfully deleted image for primary contact number: ' + primaryContactNumber);
+};
